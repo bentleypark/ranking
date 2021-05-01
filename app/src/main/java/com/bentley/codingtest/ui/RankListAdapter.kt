@@ -2,9 +2,11 @@ package com.bentley.codingtest.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.bentley.codingtest.R
 import com.bentley.codingtest.data.model.Rank
 import com.bentley.codingtest.databinding.ItemRankBinding
 
@@ -17,12 +19,33 @@ class RankListAdapter(private val rankList: List<Rank>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Rank) {
             binding.apply {
+
+                if (item.isMe) {
+                    highlightBackgroundView.setBackgroundResource(R.drawable.my_profile_highlighted)
+                    tvRank.setTextColor(tvRank.context.resources.getColor(R.color.white, null))
+                    tvNickname.setTextColor(
+                        tvNickname.context.resources.getColor(
+                            R.color.white,
+                            null
+                        )
+                    )
+                    tvDiffRank.apply {
+                        text = item.diffRank.toString()
+                        isVisible = true
+                    }
+                    ivRankArrow.isVisible = true
+                    tvNickname.text = "나, ${item.age}"
+                } else {
+                    tvNickname.text = "${item.nickName}, ${item.age}"
+                    highlightBackgroundView.setBackgroundColor(highlightBackgroundView.context.resources.getColor(R.color.white,null))
+                }
+
                 tvRank.text = item.rank.toString()
                 ivProfileImg.load(item.profileImg) {
                     crossfade(true)
                     transformations(CircleCropTransformation())
                 }
-                tvNickname.text = item.nickName
+
             }
         }
     }
@@ -39,4 +62,8 @@ class RankListAdapter(private val rankList: List<Rank>) :
     }
 
     override fun getItemCount() = rankList.size
+
+    override fun getItemId(position: Int): Long {
+        return rankList[position].rank.toLong()
+    }
 }

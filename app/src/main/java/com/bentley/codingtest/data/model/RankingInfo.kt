@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName
 data class RankingInfo(
     @SerializedName("location")
     val location: String,
-    @SerializedName("my_profile")
+    @SerializedName("my_profile_image")
     val profileImg: String,
     @SerializedName("my_rank")
     val myRank: Int,
-    @SerializedName("segment")
-    val segment: String,
+    @SerializedName("percent")
+    val percent: String,
     @SerializedName("rank_list")
     val totalRank: List<Rank>,
 )

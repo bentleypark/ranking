@@ -3,8 +3,11 @@ package com.bentley.codingtest.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.bentley.codingtest.R
 import com.bentley.codingtest.data.DataState
 import com.bentley.codingtest.data.model.RankingInfo
@@ -32,6 +35,10 @@ class MainActivity : AppCompatActivity() {
                 when (it) {
                     is DataState.Success<RankingInfo> -> {
                         setupViews(it.data)
+                        binding.progressCircular.isVisible = false
+                    }
+                    is DataState.Loading -> {
+                        binding.progressCircular.isVisible = true
                     }
                 }
             })
@@ -47,6 +54,13 @@ class MainActivity : AppCompatActivity() {
                 adapter = listAdapter
                 addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             }
+
+            tvLocation.text = initialData.location
+            ivMyProfileImg.load(initialData.profileImg) {
+                transformations(CircleCropTransformation())
+            }
+            tvMyRank.text = initialData.myRank.toString()
+            tvRankInfo.text = "상위 ${initialData.percent}"
         }
     }
 }

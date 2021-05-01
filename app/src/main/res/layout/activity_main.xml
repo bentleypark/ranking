@@ -57,7 +57,7 @@
             android:background="@drawable/gradient_bg">
 
             <TextView
-                android:id="@+id/location_info"
+                android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -69,35 +69,37 @@
                 tools:text="서울시 강남구" />
 
             <ImageView
-                android:id="@+id/my_profile_img"
+                android:id="@+id/iv_my_profile_img"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="@+id/location_info"
-                app:layout_constraintTop_toBottomOf="@+id/location_info" />
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toStartOf="@+id/tv_location"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
             <TextView
-                android:id="@+id/my_rank"
+                android:id="@+id/tv_my_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="14dp"
                 android:textColor="@color/white"
                 android:textSize="44sp"
-                app:layout_constraintStart_toEndOf="@+id/my_profile_img"
-                app:layout_constraintTop_toBottomOf="@+id/location_info"
+                app:layout_constraintStart_toEndOf="@+id/iv_my_profile_img"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location"
                 tools:text="89" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="35dp"
                 android:text="@string/rank_text"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/my_rank"
-                app:layout_constraintTop_toBottomOf="@+id/location_info" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/tv_my_rank"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
             <TextView
                 android:id="@+id/tv_guide_msg"
@@ -109,7 +111,7 @@
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/my_rank" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_my_rank" />
 
             <TextView
                 android:id="@+id/tv_guide_msg2"
@@ -123,7 +125,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg" />
 
             <TextView
-                android:id="@+id/rank_info"
+                android:id="@+id/tv_rank_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
@@ -141,11 +143,11 @@
                 android:text="@string/guide_msg3"
                 android:textColor="#8FFF"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/rank_info"
-                app:layout_constraintTop_toTopOf="@+id/rank_info" />
+                app:layout_constraintStart_toEndOf="@+id/tv_rank_info"
+                app:layout_constraintTop_toTopOf="@+id/tv_rank_info" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/bottomView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -154,6 +156,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_circular"
+            style="?android:progressBarStyleLarge"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_rank_list"
