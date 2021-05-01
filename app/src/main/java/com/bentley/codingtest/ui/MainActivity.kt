@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 transformations(CircleCropTransformation())
             }
             tvMyRank.text = initialData.myRank.toString()
-            tvRankInfo.text = "상위 ${initialData.percent}"
+            tvRankInfo.text = initialData.percent
         }
     }
 }

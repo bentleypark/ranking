@@ -20,7 +20,14 @@ class RankListAdapter(private val rankList: List<Rank>) :
         fun bind(item: Rank) {
             binding.apply {
 
+                tvRank.text = item.rank.toString()
+                ivProfileImg.load(item.profileImg) {
+                    crossfade(true)
+                    transformations(CircleCropTransformation())
+                }
+
                 if (item.isMe) {
+                    highlightBackgroundView.isVisible = true
                     highlightBackgroundView.setBackgroundResource(R.drawable.my_profile_highlighted)
                     tvRank.setTextColor(tvRank.context.resources.getColor(R.color.white, null))
                     tvNickname.setTextColor(
@@ -37,15 +44,20 @@ class RankListAdapter(private val rankList: List<Rank>) :
                     tvNickname.text = "나, ${item.age}"
                 } else {
                     tvNickname.text = "${item.nickName}, ${item.age}"
-                    highlightBackgroundView.setBackgroundColor(highlightBackgroundView.context.resources.getColor(R.color.white,null))
+                    highlightBackgroundView.setBackgroundColor(
+                        highlightBackgroundView.context.resources.getColor(
+                            android.R.color.transparent,
+                            null
+                        )
+                    )
+                    tvRank.setTextColor(tvRank.context.resources.getColor(R.color.rank_text, null))
+                    tvNickname.setTextColor(
+                        tvNickname.context.resources.getColor(
+                            R.color.nickname_text,
+                            null
+                        )
+                    )
                 }
-
-                tvRank.text = item.rank.toString()
-                ivProfileImg.load(item.profileImg) {
-                    crossfade(true)
-                    transformations(CircleCropTransformation())
-                }
-
             }
         }
     }
@@ -62,8 +74,4 @@ class RankListAdapter(private val rankList: List<Rank>) :
     }
 
     override fun getItemCount() = rankList.size
-
-    override fun getItemId(position: Int): Long {
-        return rankList[position].rank.toLong()
-    }
 }
