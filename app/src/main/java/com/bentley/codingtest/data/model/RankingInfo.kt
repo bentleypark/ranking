@@ -20,6 +20,8 @@ data class Rank(
     val rank: Int,
     @SerializedName("profile_image")
     val profileImg: String,
+    @SerializedName("nick_name")
+    val nickName: String,
     @SerializedName("age")
     val age: Int,
     @SerializedName("is_me")

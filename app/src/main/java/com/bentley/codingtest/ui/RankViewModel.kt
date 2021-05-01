@@ -23,6 +23,10 @@ constructor(
     private val _rankInfo = MutableLiveData<DataState<RankingInfo>>()
     val rankInfo: LiveData<DataState<RankingInfo>> = _rankInfo
 
+    init {
+        fetchInitialData()
+    }
+
     fun fetchInitialData() {
         viewModelScope.launch {
             rankRepository.fetchRankInfo()
